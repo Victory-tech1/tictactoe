@@ -1,0 +1,358 @@
+/*----- Default Styles -----*/
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'roboto condensed';
+}
+.btn{
+  height: 30px;
+  background-color: #B40000;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 0 30px;
+  color: #fff;
+}
+.grid-ctn{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/*----- Nav Section styles -----*/
+
+nav{
+  background-color: #FFFFFF;
+  padding: 10px 5%;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+nav img{
+  background-color: #EEEEEE;
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+}
+.logo{
+  margin-right: auto;
+  display: flex;
+}
+.logo h1{
+  height: 30px;
+  margin-left: 10px;
+}
+
+/*----- Header Section styles -----*/
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #FFEFD6;
+  padding: 10px 5%;
+  align-items: center;
+  column-gap: 10px;
+}
+header *{
+  display: inline-block;
+}
+header h1{
+  text-transform: uppercase;
+}
+.blue-text{
+  color: #0006B4;
+}
+.red-text{
+  color: #B40000;
+}
+
+/*----- Game Section styles -----*/
+
+.game {
+  padding: 0 10%;
+  box-sizing: border-box;
+  background-color: #FFEFD6;
+}
+#display {
+  border: 1px solid #707070;
+  background-color: #fff;
+  width: 100%;
+  height: 45px;
+  font-size: 35px;
+  border-radius: 5px;
+  line-height: 60px;
+  margin: 10px 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.turn {
+  font-size: 25px;
+}
+.box-ctn {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: solid 1px #707070;
+  border-radius: 5px;
+  padding: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 100px;
+  line-height: 100%;
+  text-align: center;
+  background-color: #eee;
+  border: solid 2px #707070;
+}
+
+/*------ ScoreBoard -------*/
+
+.scoreboard-ctn{
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #707070;
+  text-align: center;
+  padding: 5px 15px 15px;
+  margin-top: 10px;
+}
+.scoreboard-ctn h1{
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #B40000;
+}
+.scoreboard-ctn h1 span{
+  color: #0006B4;
+}
+.scoreboard-display-ctn{
+  display: flex;
+  gap: 15px;
+}
+.scoreboard-display-ctn > div{
+  width: 100%;
+  color: #fff;
+}
+.player-name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  text-transform: uppercase;
+  background-color: #B40000;
+  border-radius: 5px;
+}
+.score-display{
+  margin-top: 7px;
+  height: 60px;
+  background-color: #B40000;
+  border-radius: 5px;
+  font-size: 56px;
+  font-weight: bold;
+}
+
+/*-----  buttons styles  -----*/
+
+.reset-btn-ctn{
+}
+.play-mode-ctn{
+  margin-left: auto;
+}
+.play-mode-ctn span{
+  margin-left: 5px;
+  font-size: 13px;
+}
+.play-mode-ctn button{
+  padding: 0 20px;
+  z-index: 1;
+}
+.play-mode-menu ul{
+  position: absolute;
+  width: 128px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #707070;
+  list-style: none;
+}
+.play-mode-menu ul li{
+  padding: 8px 10px;
+  display: flex;
+  border-top: 1px solid #707070;
+  font-size: 12px;
+}
+.reset-score-btn{
+}
+.reset-score-btn button{
+  display: block;
+  margin: 10px auto 20px;
+}
+
+/*-----  footer styles  -----*/
+
+footer{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.dev-details{
+  padding: 30px 5% 3px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.dev-info{
+  grid-column: span 4;
+}
+.contact-dev{
+  grid-column: span 4;
+}
+.dev-portfolio{
+  grid-column: span 4;
+}
+.dev-details h2 {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.dev-details div{
+  margin-bottom: 27px;
+}
+.dev-details button{
+  background-color: #0006B4;
+}
+.dev-portfolio button{
+  font-size: 12px;
+}
+.copyright-details{
+  text-align: center;
+  background-color: #FFEFD6;
+  padding: 15px 0;
+}
+
+/*----- Styles for Responsiveness  -----*/ 
+
+@media screen and (min-width: 375px) {
+  header{
+    padding: 10px 6%;
+  }
+  header h1{
+    font-size: 38px;
+  }
+  header h2{
+    font-size: 30px;
+  }
+  .box{
+    height: 70px;
+  }
+  .play-mode-ctn button{
+    padding: 0 35px;
+  }
+  .play-mode-menu ul{
+    width: 158px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .game{
+    padding: 10px 5% 30px;
+  }
+  .game-box .box-ctn{
+    width: min-content;
+  }
+  .box{
+    height: 70px;
+    width: 70px;
+  }
+  .display{
+    grid-column: 7 / span 6;
+    grid-row: 1/ span 1;
+    padding-left: 5%;
+  }
+  .game-box{
+    grid-column: 1 / span 6;
+    grid-row: 1/span 2;
+    padding-right: 5%;
+  }
+  .reset-btn-ctn{
+    grid-column: span 2;
+    grid-row: 3/span 1;
+  }
+  .play-mode-ctn{
+    grid-column: span 4;
+    grid-row: 3/span 1;
+    padding-left: 6.7px;
+
+  }
+  .score-sec{
+    grid-column: 7/span 6;
+    grid-row: 2 / span 2;
+    padding-left: 5%;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .display{
+    grid-column: 9 / span 4;
+    grid-row: 1/ span 1;
+    width: 290px;
+    padding: 0;
+    margin: 0 auto;
+  }
+  .game-box{
+    grid-column: 1 / span 4;
+    grid-row: 1/span 2;
+    padding-right: 0;
+    margin: 0 auto;
+  }
+  .reset-btn-ctn{
+    grid-column: span 4;
+    grid-row: 3/span 1;
+    margin: 0 auto;
+  }
+  .play-mode-ctn{
+    grid-column: 5/span 4;
+    grid-row: 1/span 1;
+    padding: 0;
+    margin: auto;
+  }
+  .score-sec{
+    grid-column: 9/span 4;
+    grid-row: 2 / span 2;
+    width: 290px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .dev-info{
+    grid-column: span 2;
+    padding-right: 30px;
+  }
+  .contact-dev{
+    grid-column: span 1;
+  }
+  .dev-portfolio{
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="" alt="">
+            <h1>victorytech</h1>
+        </div>
+        <div class="settings"><img src="" alt=""></div>
+    </nav>
+    <header>
+        <h2><i>Play Fun</i></h2>
+        <h1 class="main-text"><span class="blue-text">Tic</span> Tac <span class="red-text">Toe</span></h1>
+        <h2><i>Game</i></h2>
+        <p><i>with friends or AI</i></p>
+    </header>
+    <section class="game grid-ctn">
+        <div class="display col-12">
+            <div class="turn">Turn: <span id="turnDisplay">PLAYER 1</span></div>
+            <div id="display"></div>
+        </div>
+        <div class="game-box col-12">
+            <div class="box-ctn">
+                <div class="box" id="box1"></div>
+                <div class="box" id="box2"></div>
+                <div class="box" id="box3"></div>
+                <div class="box" id="box4"></div>
+                <div class="box" id="box5"></div>
+                <div class="box" id="box6"></div>
+                <div class="box" id="box7"></div>
+                <div class="box" id="box8"></div>
+                <div class="box" id="box9"></div>
+            </div>
+        </div>
+        <div id="continue" class="reset-btn-ctn col-4"><button class="reset btn">Reset</button></div>
+        <div class="play-mode-ctn col-8">
+            <button id="play-mode" class="btn">Play mode<span>&#129139;</span></button>
+            <div class="play-mode-menu">
+                <ul>
+                    <li><h3>Play vs AI mode</h3><img src="" alt=""></li>
+                    <li><h3>2 player mode</h3><img src="" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="score-sec col-12">
+            <div class="scoreboard-ctn">
+                <h1>Score<span>board</span></h1>
+                <div class="scoreboard-display-ctn">
+                    <div>
+                        <div class="player-name">Player 1</div>
+                        <div id="p1Score" class="score-display"></div>
+                    </div>
+                    <div>
+                        <div class="player-name">Player 2</div>
+                        <div id="p2Score" class="score-display"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="reset-score-btn col-12"><button id="resetScore" class="btn">Reset score</button></div>
+        </div>
+        
+    </section>
+    <footer>
+        <div class="dev-details">
+            <div class="dev-info">
+                <h2>Developer info</h2>
+                <p>Victory Tech is a web design and development
+                    company that creates unique, fast, responsive
+                    and functional websites for individuals and
+                    businesses.</p>
+            </div>
+            <div class="contact-dev">
+                <h2>Contact Developer</h2>
+                <a href="">@ victorytech1v@gmail.com</a><br>
+                <a href="">@ +234 810 571 5843</a>
+            </div>
+            <div class="dev-portfolio">
+                <h2>Developer's Portfolio</h2>
+                <a title="Visit Developer's Websites" href="https://victory-tech1.github.io/portfoilio/"><button class="btn">Click to visit Developer's portfoilio</button></a>
+            </div>
+        </div>
+        <div class="copyright-details">
+            Copyright @ 2025 Victory Tech &copy;. All Rights Reserved.
+        </div>
+    </footer>
+    <script src="./script.js"></script>
+</body>
+</html>
