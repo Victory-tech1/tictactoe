@@ -234,6 +234,18 @@ function twoPlayersMode() {
   });
 }
 
+
+function perferedMove() {
+  moves = [1,2,3,4,5,6,7,8,9];
+  bestMove = [];
+  for(let i = 0; i < 9; i++) {
+    if (boxes[i].innerHTML == ("X" || "O")) {
+      moves[i] = null;
+    }
+  };
+  return moves;
+};
+
 function aiMove() {
   if (box5.innerHTML == "") {
     box5.innerHTML = "O";
@@ -255,7 +267,9 @@ function vsAiMode() {
           xwin();
           owin();
           full();
-          setTimeout(aiMove, 1500);
+          console.log(perferedMove());
+          // setTimeout(aiMove, 1500);
+          // console.log(perferedMove());
         }
       })
     });
