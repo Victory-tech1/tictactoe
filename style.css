@@ -65,6 +65,7 @@ header {
   background-color: #FFEFD6;
   padding: 10px 5%;
   align-items: center;
+  justify-content: center;
   column-gap: 10px;
 }
 header *{
