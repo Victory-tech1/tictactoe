@@ -282,27 +282,36 @@ xPositions = [],
 emptyBoxes = [...boxes];
 
 function aiDefMove() {
-  let outerBreak = false;
   for ( x in winMoves ) {
-    for( y in xPositions ){
+    for( y in xPositions ) {
       if (winMoves[x].att[0] == ((boxes.indexOf(xPositions[y])) + 1)) {
         for ( z in xPositions ){
-          if( winMoves[x].att[1] == ((boxes.indexOf(xPositions[z])) + 1 )) {
-            console.log(winMoves[x].def);
-            outerBreak = true;
-            break;
+          if( winMoves[x].att[1] == ((boxes.indexOf(xPositions[z])) + 1 ) && boxes[(winMoves[x].def) - 1].innerHTML == "") {
+            console.log('AI DEF MOVE IS ' + (winMoves[x].def));
+            return (winMoves[x].def);
           }
         }
       }
-      if(outerBreak) {
-        break;
-      }
-    }
-    if(outerBreak) {
-      break;
     }
   }
+  return 0;
 }
+function aiWinMove() {
+  for ( x in winMoves ) {
+    for( y in oPositions ) {
+      if (winMoves[x].att[0] == ((boxes.indexOf(oPositions[y])) + 1)) {
+        for ( z in xPositions ){
+          if( winMoves[x].att[1] == ((boxes.indexOf(oPositions[z])) + 1 ) && boxes[(winMoves[x].def) - 1].innerHTML == "") {
+            console.log('AI WIN MOVE IS ' + (winMoves[x].def));
+            return (winMoves[x].def);
+          }
+        }
+      }
+    }
+  }
+  return 0;
+}
+
 function positions() {
   for( x in emptyBoxes ) {
     if (emptyBoxes[x].innerHTML == "X"){
@@ -315,6 +324,16 @@ function positions() {
     }
   }
 }
+let xTick = (index) => {
+  if (boxes[index].innerHTML === "") {
+    boxes[index].innerHTML = "X";
+  }
+}
+let oTick = (index) => {
+  if (boxes[index].innerHTML === "") {
+    boxes[index].innerHTML = "O";
+  }
+}
 // function defMove() {
 //   for(const x in winMoves) {
 //     if (boxes[(allDef[x].att[0])] == "X" && boxes[(allDef[x].att[1])] == "X") {
@@ -323,50 +342,114 @@ function positions() {
 //   };
 // }
 // defMove();
-function perferedMove() {
-  // box 5 will be the most prefered move.
-  // next any winning move will be prefered.
-  // next any defence move will be prefered.
-  // flollowed by the the boxes on the edges.
-  box5preference = 20;
+function centerBoxEmpty(){
+  if (boxes[4].innerHTML == "") {
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function centerMove() {
+  if (centerBoxEmpty()){
+    console.log('CENTER MOVE IS ' + (4));
+    return 4;
+  }
+  return 0;
+}
+
+function edgeMoves() {
+  for ( x in boxes ) {
+    x = Number(x);
+    if ( x % 2 == 0 && boxes[x].innerHTML == "" ) {
+      console.log('EDGE MOVE IS ' + (x + 1));
+      return x + 1;
+    }
+  }
+  return 0;
+}
+
+function setupMove() {
+  for (x in winMoves) {
+    if(boxes[winMoves[x].att[0] - 1].innerHTML == "O" &&
+      boxes[winMoves[x].att[1] - 1].innerHTML == "" &&
+      boxes[winMoves[x].def - 1].innerHTML == "")
+    {
+      console.log('EDGE MOVE IS ' + (winMoves[x].att[1]) - 1);
+      return (winMoves[x].att[1]) - 1;
+    }
+  }
+  console.log(0);
+  return 0;
 }
 
 function aiMove() {
-  if (box5.innerHTML == "") {
-    box5.innerHTML = "O";
-  } else if (box5.innerHTML != "") {
-    box1.innerHTML = "O";
+  if (aiWinMove() != 0) {
+    oTick((aiWinMove()) - 1);
+  }
+  else if (aiDefMove() != 0){
+    oTick((aiDefMove()) - 1);
+  }
+  else if (centerMove() != 0) {
+    oTick(centerMove());
+  }
+  else if (edgeMoves() != 0) {
+    oTick(edgeMoves() - 1);
+  }
+  else {
+    oTick((setupMove()) - 1);
   }
 }
 
 function vsAiMode() {
-  CurrentPlayer = 1;
-  openBoxes = 9;
-  if (CurrentPlayer == 1) {
-    boxes.forEach((element) => {
-      element.addEventListener("click", (e) => {
-        if (CurrentPlayer == 1 &&
-          element.innerHTML == "" &&
-          gameEnded == false) {
-          element.innerHTML = "X";
-          openBoxes--;
-          // console.log(openBoxes);
-          // turnDisplay.innerHTML = "Player 2";
-          xwin();
-          full();
-          // allPossibleMoves();
-          // positions();
-          // setTimeout(aiMove, 1500);
-          positions();
-          aiDefMove();
-          // turnDisplay.innerHTML = "Player 1";
-          // owin();
-          // full();
-        }
-      })
+  boxes.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      if (element.innerHTML == "" &&
+        gameEnded == false) {
+        element.innerHTML = "X";
+        turnDisplay.innerHTML = "Player 2";
+        xwin();
+        full();
+        positions();
+        aiMove();
+        // console.log("Def move is = " + aiDefMove());
+        // console.log("Win move is = " + aiWinMove());
+        // console.log("Setup move is = " + setupMove());
+        // setTimeout(aiMove, 2500);
+        owin();
+        full();
+        turnDisplay.innerHTML = "Player 1";
+      }
     });
-  }
+  });
 }
+// function vsAiMode() {
+//   CurrentPlayer = 1;
+//   openBoxes = 9;
+//   if (CurrentPlayer == 1 && gameEnded == false) {
+//     boxes.forEach((element) => {
+//       element.addEventListener("click", (e) => {
+//         if (element.innerHTML == "") {
+//           element.innerHTML = "X";
+//           openBoxes--;
+//           // console.log(openBoxes);
+//           // turnDisplay.innerHTML = "Player 2";
+//           xwin();
+//           full();
+//         };
+//       })
+//     });
+//   }
+//   else if ( CurrentPlayer == 2 && gameEnded == false ) {
+//     positions();
+//     // allPossibleMoves();
+//     // positions();
+//     // turnDisplay.innerHTML = "Player 1";
+//     // owin();
+//     // full();
+//   }
+// }
 
 
 vsAiMode();

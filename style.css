@@ -123,8 +123,8 @@ header h1{
   border-radius: 5px;
   margin: 5px;
   padding: 5px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 100px;
+  font-family: roboto, 'Courier New', Courier, monospace;
+  font-size: 80px;
   line-height: 100%;
   text-align: center;
   background-color: #eee;
