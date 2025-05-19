@@ -1,28 +1,43 @@
-let box1 = document.getElementById("box1"),
-  box2 = document.getElementById("box2"),
-  box3 = document.getElementById("box3"),
-  box4 = document.getElementById("box4"),
-  box5 = document.getElementById("box5"),
-  box6 = document.getElementById("box6"),
-  box7 = document.getElementById("box7"),
-  box8 = document.getElementById("box8"),
-  box9 = document.getElementById("box9"),
-  p1Score = document.getElementById("p1Score"),
-  p2Score = document.getElementById("p2Score"),
-  turnDisplay = document.getElementById("turnDisplay"),
-  contBtn = document.getElementById("continue"),
-  display = document.getElementById("display"),
-  resetScore = document.getElementById("resetScore"),
+function get(item) {
+  return document.getElementById(item);
+}
+
+//  Display Menu Script
+
+const playModeBtn = get("play-mode"),
+playModeMenu = get("play-mode-menu");
+
+playModeBtn.addEventListener('click', () => {
+  playModeMenu.classList.toggle('appear');
+})
+
+let box1 = get("box1"),
+  box2 = get("box2"),
+  box3 = get("box3"),
+  box4 = get("box4"),
+  box5 = get("box5"),
+  box6 = get("box6"),
+  box7 = get("box7"),
+  box8 = get("box8"),
+  box9 = get("box9"),
+  p1Score = get("p1Score"),
+  p2Score = get("p2Score"),
+  turnDisplay = get("turnDisplay"),
+  contBtn = get("continue"),
+  display = get("display"),
+  resetScore = get("resetScore"),
   playerName = "PLAYER 1";
 const boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
 let p1 = 0;
 let p2 = 0;
 p1Score.innerHTML = p1;
 p2Score.innerHTML = p2;
-CurrentPlayer = 1;
-winner = 0;
-gameEnded = false;
-isPlayModeAi = false;
+let CurrentPlayer = 1;
+let winner = 0;
+let gameEnded = false;
+let isPlayModeAi = false;
+
+const loading = get("loading");
 
 function reset() {
   for ( x in boxes){
@@ -50,7 +65,7 @@ function xwin() {
     p1 += 1;
     p1Score.innerHTML = p1;
     gameEnded = true;
-    return;
+    return true;
   }
 }
 function owin() {
@@ -70,7 +85,7 @@ function owin() {
     p2 += 1;
     p2Score.innerHTML = p2;
     gameEnded = true;
-    return;
+    return true;
   }
 }
 function full() {
@@ -286,7 +301,7 @@ function aiDefMove() {
     for( y in xPositions ) {
       if (winMoves[x].att[0] == ((boxes.indexOf(xPositions[y])) + 1)) {
         for ( z in xPositions ){
-          if( winMoves[x].att[1] == ((boxes.indexOf(xPositions[z])) + 1 ) && boxes[(winMoves[x].def) - 1].innerHTML == "") {
+          if( (winMoves[x].att[1] == ((boxes.indexOf(xPositions[z])) + 1 )) && (boxes[((winMoves[x].def) - 1)].innerHTML == "")) {
             console.log('AI DEF MOVE IS ' + (winMoves[x].def));
             return (winMoves[x].def);
           }
@@ -294,6 +309,7 @@ function aiDefMove() {
       }
     }
   }
+  console.log('AI DEF MOVE IS JUMPED');
   return 0;
 }
 function aiWinMove() {
@@ -376,7 +392,7 @@ function setupMove() {
       boxes[winMoves[x].att[1] - 1].innerHTML == "" &&
       boxes[winMoves[x].def - 1].innerHTML == "")
     {
-      console.log('EDGE MOVE IS ' + (winMoves[x].att[1]) - 1);
+      console.log('SETUP MOVE IS ' + (winMoves[x].att[1]) - 1);
       return (winMoves[x].att[1]) - 1;
     }
   }
@@ -400,6 +416,16 @@ function aiMove() {
   else {
     oTick((setupMove()) - 1);
   }
+  load();
+  if(owin()) {
+    owin();
+    display.innerHTML = "AI WON";
+  }
+  full();
+  turnDisplay.innerHTML = "Player 1";
+}
+function load() {
+  loading.classList.toggle("flex");
 }
 
 function vsAiMode() {
@@ -412,14 +438,10 @@ function vsAiMode() {
         xwin();
         full();
         positions();
-        aiMove();
-        // console.log("Def move is = " + aiDefMove());
-        // console.log("Win move is = " + aiWinMove());
-        // console.log("Setup move is = " + setupMove());
-        // setTimeout(aiMove, 2500);
-        owin();
-        full();
-        turnDisplay.innerHTML = "Player 1";
+        if (!(xwin())) {
+         load();
+         setTimeout(aiMove, 2500);
+        }
       }
     });
   });
