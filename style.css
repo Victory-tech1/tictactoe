@@ -33,6 +33,7 @@
 .col-11 { grid-column: span 11; }
 .col-12 { grid-column: span 12; }
 
+
 /*----- Nav Section styles -----*/
 
 nav{
@@ -139,14 +140,20 @@ header h1{
 }
 .loading{
   background-color: rgba(0, 68, 255, 0.2);
-  position: absolute;
-  height: 250px;
-  width: 274px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
   z-index: 5;
   display: none;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  top: 0;
+  left: 0;
+}
+.loading img{
+  height: 50px;
+  width: auto;
+  border-radius: 10px;
 }
 .flex{
   display: flex;
@@ -198,8 +205,6 @@ header h1{
 
 /*-----  buttons styles  -----*/
 
-.reset-btn-ctn{
-}
 .play-mode-ctn{
   margin-left: auto;
 }
@@ -228,8 +233,6 @@ header h1{
 }
 .appear{
   animation: appear 0.5s forwards;
-}
-.reset-score-btn{
 }
 .reset-score-btn button{
   display: block;

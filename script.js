@@ -35,9 +35,12 @@ p2Score.innerHTML = p2;
 let CurrentPlayer = 1;
 let winner = 0;
 let gameEnded = false;
-let isPlayModeAi = false;
+let playMode = false;
+let mode = "AI";
 
-const loading = get("loading");
+const loading = get("loading"),
+aiModeBtn = get("ai-mode-btn"),
+twoPlayersModeBtn = get("two-players-mode-btn");
 
 function reset() {
   for ( x in boxes){
@@ -47,6 +50,7 @@ function reset() {
   xPositions = [];
   oPositions = [];
   emptyBoxes = [...boxes];
+  loading.classList.remove("flex");
 }
 function xwin() {
   if (
@@ -105,6 +109,7 @@ function full() {
     display.innerHTML = "NO WINNER";
     turnDisplay.innerHTML = "Game Ended";
     gameEnded = true;
+    return true;
   }
 }
 function scoreBoard() {
@@ -117,65 +122,9 @@ function scoreBoard() {
     return;
   }
 }
+
+
 // Creating "play with AI" functionality.
-// let aiSwitch = document.getElementById("ai-switch"),
-//   aiSwitchCircle = document.getElementById("ai-switch-circle"),
-//   TorF = 0,
-//   ai = false,
-//   i = 0;
-
-// aiSwitch.addEventListener("click", () => {
-//   if (TorF == 0) {
-//     aiSwitch.style.backgroundColor = "green";
-//     aiSwitchCircle.style.left = "19px";
-//     TorF = 1;
-//     ai = true;
-//   } else {
-//     aiSwitch.style.backgroundColor = "red";
-//     aiSwitchCircle.style.left = "-19px";
-//     TorF = 0;
-//     ai = false;
-//   }
-// });
-
-// while (i < 6) {
-//   if (ai == true && CurrentPlayer == 2 && gameEnded == false) {
-//     document.write("now!!!!");
-//     box5.innerHTML = "O";
-//     turnDisplay.innerHTML = "Player 1";
-//     CurrentPlayer = 1;
-//     xwin();
-//     owin();
-//     full();
-//   }
-//   boxes.forEach((element) => {
-//     element.addEventListener("click", (e) => {
-//       if (CurrentPlayer == 1 && element.innerHTML == "" && gameEnded == false) {
-//         element.innerHTML = "X";
-//         turnDisplay.innerHTML = "Player 2";
-//         CurrentPlayer = 2;
-//         xwin();
-//         owin();
-//         full();
-//       }
-//       if (
-//         CurrentPlayer == 2 &&
-//         element.innerHTML == "" &&
-//         gameEnded == false &&
-//         ai == false
-//       ) {
-//         element.innerHTML = "O";
-//         turnDisplay.innerHTML = "Player 1";
-//         CurrentPlayer = 1;
-//         xwin();
-//         owin();
-//         full();
-//       }
-//     });
-//   });
-//   console.log("hello, world");
-//   i++;
-// }
 
 contBtn.addEventListener("click", (e) => {
   if (
@@ -303,6 +252,9 @@ function aiDefMove() {
         for ( z in xPositions ){
           if( (winMoves[x].att[1] == ((boxes.indexOf(xPositions[z])) + 1 )) && (boxes[((winMoves[x].def) - 1)].innerHTML == "")) {
             console.log('AI DEF MOVE IS ' + (winMoves[x].def));
+            if (mode === "2P") {
+              return 0;
+            }
             return (winMoves[x].def);
           }
         }
@@ -319,6 +271,9 @@ function aiWinMove() {
         for ( z in xPositions ){
           if( winMoves[x].att[1] == ((boxes.indexOf(oPositions[z])) + 1 ) && boxes[(winMoves[x].def) - 1].innerHTML == "") {
             console.log('AI WIN MOVE IS ' + (winMoves[x].def));
+            if (mode === "2P") {
+              return 0;
+            }
             return (winMoves[x].def);
           }
         }
@@ -359,15 +314,21 @@ let oTick = (index) => {
 // }
 // defMove();
 function centerBoxEmpty(){
+  if (mode === "2P") {
+    return 0;
+  }
   if (boxes[4].innerHTML == "") {
     return true;
   }
   else{
-    return false;
+    return 0;
   }
 }
 
 function centerMove() {
+  if (mode === "2P") {
+    return 0;
+  }
   if (centerBoxEmpty()){
     console.log('CENTER MOVE IS ' + (4));
     return 4;
@@ -377,6 +338,9 @@ function centerMove() {
 
 function edgeMoves() {
   for ( x in boxes ) {
+    if (mode === "2P") {
+      return 0;
+    }
     x = Number(x);
     if ( x % 2 == 0 && boxes[x].innerHTML == "" ) {
       console.log('EDGE MOVE IS ' + (x + 1));
@@ -388,6 +352,9 @@ function edgeMoves() {
 
 function setupMove() {
   for (x in winMoves) {
+    if (mode === "2P") {
+      return 0;
+    }
     if(boxes[winMoves[x].att[0] - 1].innerHTML == "O" &&
       boxes[winMoves[x].att[1] - 1].innerHTML == "" &&
       boxes[winMoves[x].def - 1].innerHTML == "")
@@ -413,8 +380,11 @@ function aiMove() {
   else if (edgeMoves() != 0) {
     oTick(edgeMoves() - 1);
   }
-  else {
+  else if (setupMove() != 0) {
     oTick((setupMove()) - 1);
+  }
+  else{
+    return 0;
   }
   load();
   if(owin()) {
@@ -438,7 +408,7 @@ function vsAiMode() {
         xwin();
         full();
         positions();
-        if (!(xwin())) {
+        if (!(xwin()) && !full()) {
          load();
          setTimeout(aiMove, 2500);
         }
@@ -446,39 +416,28 @@ function vsAiMode() {
     });
   });
 }
-// function vsAiMode() {
-//   CurrentPlayer = 1;
-//   openBoxes = 9;
-//   if (CurrentPlayer == 1 && gameEnded == false) {
-//     boxes.forEach((element) => {
-//       element.addEventListener("click", (e) => {
-//         if (element.innerHTML == "") {
-//           element.innerHTML = "X";
-//           openBoxes--;
-//           // console.log(openBoxes);
-//           // turnDisplay.innerHTML = "Player 2";
-//           xwin();
-//           full();
-//         };
-//       })
-//     });
-//   }
-//   else if ( CurrentPlayer == 2 && gameEnded == false ) {
-//     positions();
-//     // allPossibleMoves();
-//     // positions();
-//     // turnDisplay.innerHTML = "Player 1";
-//     // owin();
-//     // full();
-//   }
-// }
+
+function startGame() {
+  if (localStorage.getItem("currentMode") === '2P') {
+    display.innerHTML = "Switched to two player mode";
+    twoPlayersMode();
+  }
+  else {
+    display.innerHTML = "Switched to AI mode";
+    vsAiMode();
+  }
+}
 
 
-vsAiMode();
 
-// if (isPlayModeAi == true) {
-//   twoPlayersMode();
-// }
-// else {
-//   vsAiMode();
-// }
+aiModeBtn.addEventListener("click" , () => {
+  localStorage.setItem("currentMode", "AI");
+  location.reload();
+})
+
+twoPlayersModeBtn.addEventListener("click" , () => {
+  localStorage.setItem("currentMode", "2P");
+  location.reload();
+})
+
+startGame();

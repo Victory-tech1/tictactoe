@@ -19,7 +19,7 @@
         <h2><i>Play Fun</i></h2>
         <h1 class="main-text"><span class="blue-text">Tic</span> Tac <span class="red-text">Toe</span></h1>
         <h2><i>Game</i></h2>
-        <p><i>with friends or AI</i></p>
+        <p><i>with friends or computer</i></p>
     </header>
     <section class="game grid-ctn">
         <div class="display col-12">
@@ -38,18 +38,18 @@
                 <div class="box" id="box8"></div>
                 <div class="box" id="box9"></div>
                 <div id="loading" class="loading">
-                    <div><img src="thinking.gif" alt="Thinking...">
+                    <div><img src="./images/loading.gif" alt="Thinking...">
                 </div>
             </div>
-    </div>
+        </div>
         </div>
         <div id="continue" class="reset-btn-ctn col-4"><button class="reset btn">Reset</button></div>
         <div class="play-mode-ctn col-8">
             <button id="play-mode" class="btn">Play mode<span>&#129139;</span></button>
             <div>
                 <ul id="play-mode-menu" class="menu">
-                    <li><h3>-> Play vs AI mode</h3><img src="" alt=""></li>
-                    <li><h3>-> 2 player mode</h3><img src="" alt=""></li>
+                    <li id="ai-mode-btn"><a href="#">> Play vs AI mode</a><img src="" alt=""></li>
+                    <li id="two-players-mode-btn"><a href="#">> 2 player mode</a><img src="" alt=""></li>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,7 @@
                         <div id="p1Score" class="score-display"></div>
                     </div>
                     <div>
-                        <div class="player-name">Player 2</div>
+                        <div class="player-name">Computer</div>
                         <div id="p2Score" class="score-display"></div>
                     </div>
                 </div>
